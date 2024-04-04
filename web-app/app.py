@@ -1,14 +1,15 @@
-#import os
-#from dotenv import load_dotenv
+# import os
+# from dotenv import load_dotenv
 """Module providing framework for the web app."""
 from flask import Flask, render_template
-#request, redirect, abort, url_for, make_response
-#import pymongo
+
+# request, redirect, abort, url_for, make_response
+# import pymongo
 
 app = Flask(__name__)
 
 # Need to setup database
-'''
+"""
 # Connect to the MongoDB server using environment variables 
 load_dotenv()
 connection = pymongo.MongoClient(os.getenv('MONGO_URI'))
@@ -20,14 +21,16 @@ try:
 except Exception as e:
     # the ping command failed, so the connection is not available.
     print(" * MongoDB connection error:", e)
-'''
+"""
 
-@app.route('/')
+
+@app.route("/")
 def home():
     """
     Route for the home page
     """
     return render_template("index.html")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
