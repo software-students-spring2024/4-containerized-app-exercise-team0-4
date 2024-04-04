@@ -1,7 +1,9 @@
-import os
-from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, abort, url_for, make_response
-import pymongo
+#import os
+#from dotenv import load_dotenv
+"""Module providing framework for the web app."""
+from flask import Flask, render_template
+#request, redirect, abort, url_for, make_response
+#import pymongo
 
 app = Flask(__name__)
 
