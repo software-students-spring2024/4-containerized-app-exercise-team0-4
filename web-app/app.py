@@ -3,7 +3,7 @@
 """Module providing framework for the web app."""
 from flask import Flask, render_template, request
 
-#redirect, abort, url_for, make_response
+# redirect, abort, url_for, make_response
 # import pymongo
 
 app = Flask(__name__)
@@ -31,6 +31,7 @@ def home():
     """
     return render_template("index.html")
 
+
 @app.route("/record")
 def recording():
     """
@@ -38,7 +39,8 @@ def recording():
     """
     return render_template("record.html")
 
-@app.route("/record", methods=['POST'])
+
+@app.route("/record", methods=["POST"])
 def save_recording():
     """
     Route for save_recording POST request
