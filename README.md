@@ -5,7 +5,7 @@
 Build a containerized app that uses machine learning. See [instructions](./instructions.md) for details.
 
 
-## How to run MongoDB in a container
+## How to run MongoDB
 1. Pull the MongoDB image from Docker
 ```
 docker pull mongo
