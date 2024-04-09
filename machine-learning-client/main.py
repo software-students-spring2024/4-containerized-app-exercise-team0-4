@@ -3,14 +3,15 @@ from pymongo import MongoClient
 import speech_recognition as sr
 
 app = Flask(__name__)
-client = MongoClient('mongodb://localhost:27017/')
-db = client['audio-transcriptions']
-collection = db['transcriptions']
+client = MongoClient("mongodb://localhost:27017/")
+db = client["audio-transcriptions"]
+collection = db["transcriptions"]
 
-@app.route('/upload-audio', methods=['POST'])
+
+@app.route("/upload-audio", methods=["POST"])
 def upload_audio():
     # Receive audio file from frontend
-    audio_file = request.files['audio']
+    audio_file = request.files["audio"]
 
     # Transcribe the audio file (this is a placeholder function)
     transcription = transcribe_audio(audio_file)
@@ -20,13 +21,21 @@ def upload_audio():
     # Save transcription to MongoDB
     if transcription:
         transcription_data = {
-            'transcription': transcription,
-            # Add any additional metadata
+            "transcription": transcription,
+            # username won't be passed through form, but post body
+            "username": request.form.get("username"),
+            "date_created": request.form.get("date_created"),
         }
         result = collection.insert_one(transcription_data)
-        return jsonify({'message': 'Transcription saved successfully', 'id': str(result.inserted_id)})
+        return jsonify(
+            {
+                "message": "Transcription saved successfully",
+                "id": str(result.inserted_id),
+            }
+        )
     else:
-        return jsonify({'error': 'Transcription failed'})
+        return jsonify({"error": "Transcription failed"})
+
 
 def transcribe_audio(audio_file):
     # Placeholder function for transcribing audio
@@ -36,11 +45,12 @@ def transcribe_audio(audio_file):
     with sr.AudioFile(audio_file) as source:
         audio_data = r.record(source)
         try:
-            return r.recognize_sphinx(audio_data, language='en-US')
+            return r.recognize_sphinx(audio_data, language="en-US")
         except sr.UnknownValueError:
             return None
         except sr.RequestError:
             return None
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
