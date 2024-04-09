@@ -1,0 +1,120 @@
+{% extends "layout.html" %} {% block content %}
+<div class="left">
+  <div id="startButton" class="button">Start</div>
+  <audio id="preview" width="160" height="120" autoplay muted></audio>
+</div>
+<div class="right">
+  <div id="stopButton" class="button">Stop</div>
+  <h2>Recording</h2>
+  <audio id="recording" width="160" height="120" controls></audio>
+  <div id="saveButton" class="button">Save</div>
+</div>
+<div class="bottom">
+  <pre id="log"></pre>
+</div>
+
+<script>
+  let preview = document.getElementById("preview");
+  let recording = document.getElementById("recording");
+  let startButton = document.getElementById("startButton");
+  let stopButton = document.getElementById("stopButton");
+  let logElement = document.getElementById("log");
+  let recordedBlob;
+
+  let recordingTimeMS = 1000; // 1 second minimum of audio
+
+  function log(msg) {
+    logElement.innerHTML += `${msg}\n`;
+  }
+
+  function wait(delayInMS) {
+    return new Promise((resolve) => setTimeout(resolve, delayInMS));
+  }
+
+  function startRecording(stream, lengthInMS) {
+    let recorder = new MediaRecorder(stream);
+    let data = [];
+
+    recorder.ondataavailable = (event) => data.push(event.data);
+    recorder.start();
+    log(`Recording; click Stop to end`);
+
+    let stopped = new Promise((resolve, reject) => {
+      track = preview.srcObject.getTracks()[0];
+      while (track.readyState === "ended") {
+        recorder.stop(); // stop recording after user hits stop
+        break;
+      }
+      recorder.onstop = resolve;
+      recorder.onerror = (event) => reject(event.name);
+    });
+    let recorded = wait(lengthInMS).then(() => {});
+
+    return Promise.all([stopped, recorded]).then(() => data);
+  }
+
+  function stop(stream) {
+    stream.getTracks().forEach((track) => track.stop());
+  }
+
+  function save() {
+    const req = new XMLHttpRequest();
+    req.open("POST", window.location.href, true);
+    req.onload = (event) => {
+      // Uploaded
+    };
+
+    req.send(recordedBlob);
+    log(`Successfully saved audio.`);
+  }
+
+  startButton.addEventListener(
+    "click",
+    () => {
+      navigator.mediaDevices
+        .getUserMedia({
+          audio: true,
+        })
+        .then((stream) => {
+          preview.srcObject = stream;
+          preview.captureStream =
+            preview.captureStream || preview.mozCaptureStream;
+          return new Promise((resolve) => (preview.onplaying = resolve));
+        })
+        .then(() => startRecording(preview.captureStream(), recordingTimeMS))
+        .then((recordedChunks) => {
+          recordedBlob = new Blob(recordedChunks, { type: "audio/mpeg" });
+          console.log(recordedBlob);
+          recording.src = URL.createObjectURL(recordedBlob);
+
+          log(
+            `Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`
+          );
+        })
+        .catch((error) => {
+          if (error.name === "NotFoundError") {
+            log("Microphone not found. Can't record.");
+          } else {
+            log(error);
+          }
+        });
+    },
+    false
+  );
+
+  stopButton.addEventListener(
+    "click",
+    () => {
+      stop(preview.srcObject);
+    },
+    false
+  );
+  saveButton.addEventListener(
+    "click",
+    () => {
+      save();
+    },
+    false
+  );
+</script>
+{% endblock %}
