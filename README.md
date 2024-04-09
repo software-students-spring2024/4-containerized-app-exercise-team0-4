@@ -15,8 +15,8 @@ docker pull mongo
 docker run --name mongodb -d -p 27017:27017 mongo
 ```
  - --name mongodb: Names the container "mongodb" for easier reference.
-- d: Runs the container in detached mode.
-- p 27017:27017: Maps port 27017 on the host to port 27017 in the container.
+- -d: Runs the container in detached mode.
+- -p 27017:27017: Maps port 27017 on the host to port 27017 in the container.
 - mongo: Specifies the image to use.
 
 
