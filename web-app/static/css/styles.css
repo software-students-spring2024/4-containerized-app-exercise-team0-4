@@ -1,0 +1,213 @@
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
+}
+
+aside {
+    background-color: #f0f0f0;
+    padding: 20px;
+    width: 200px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+aside h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+}
+
+#content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#uploadDataButton, #profilePicture {
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#profilePicture {
+    width: 40px;
+    height: 40px;
+    background-image: url('profile-picture.png');
+    background-size: cover;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.dot {
+    width: 5px;
+    height: 10px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+#profitLoss {
+    margin-bottom: 20px;
+}
+#graphContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#graphContainer, .infoContent {
+    background-color: #ddd;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#timeFilters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#timeFilters span {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.infoSection {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    box-sizing: border-box;
+    background-color: #ddd;
+    padding: 20px;
+    text-align: center;
+}
+
+.infoSection:last-child {
+    margin-right: 0;
+}
+
+.infoContent {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Styles for the insights section */
+#insightsSection .infoSection {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(33.333% - 20px);
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+#insightsSection .infoSection.full {
+    width: calc(100% - 20px);
+    margin-right: 0;
+}
+
+#insightsSection .infoSection .infoContent {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 150px; /* Or use 'min-height' for variable content height */
+    margin-top: 10px;
+}
+
+/* Clearfix for .infoSection elements */
+#insightsSection:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ... Additional CSS if needed ... */
+#insightsSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 4vh;
+}
+
+input {
+    border: 2px solid gray;
+    padding: 0.25rem !important;
+    border-radius: 8px;
+}
+#logindiv, #signupdiv {
+    gap: 1vh;
+    align-items: flex-start;
+}
+#loginButton {
+    background-color: blue;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+    gap: 20px; /* Add space between components */
+}
+table, tr {
+    border: 1px solid black;
+}
+th, td {
+    width: 50%;
+    border: 1px solid black;
+}
+#taxesSection .infoSection {
+    width: 32%;
+}
