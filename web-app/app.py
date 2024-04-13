@@ -31,15 +31,6 @@ def home():
     """
     return render_template("index.html")
 
-
-@app.route("/record")
-def recording():
-    """
-    Route for the record page
-    """
-    return render_template("record.html")
-
-
 @app.route("/record", methods=["POST"])
 def save_recording():
     """
@@ -48,6 +39,18 @@ def save_recording():
     print("received")
     print(request.data)
     return render_template("record.html")
+
+@app.route("/record")
+def record():
+    return render_template("record.html")
+
+@app.route("/view_transcription")
+def view_transcription():
+    return render_template("view_transcription.html")
+
+@app.route("/view_all")
+def view_all():
+    return render_template("view_all.html")
 
 
 if __name__ == "__main__":
