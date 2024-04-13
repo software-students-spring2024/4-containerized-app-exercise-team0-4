@@ -6,8 +6,19 @@ name = "pypi"
 [packages]
 pylint = "*"
 black = "*"
+flask = "*"
+flask_cors = "*"
+pymongo = "*"
+python-dotenv = "*"
+typing-extensions = "*"
+speech_recognition = "*"
+pydub = "*"
+pocketspinx = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3"
+
+[scripts]
+ffmpeg-check = "echo 'Ensure FFmpeg is installed: ffmpeg -version && ffprobe -version'"
