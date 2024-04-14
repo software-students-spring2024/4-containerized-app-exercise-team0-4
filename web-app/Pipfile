@@ -11,9 +11,9 @@ flask_cors = "*"
 pymongo = "*"
 python-dotenv = "*"
 typing-extensions = "*"
-tomli = "*"  # Added tomli to resolve the pylint dependency issue
+tomli = "*"  # Ensure this line is added
 
 [dev-packages]
 
 [requires]
-python_version = "3"
+python_version = "3.10"
