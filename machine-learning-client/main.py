@@ -6,10 +6,6 @@ import ffmpeg
 import logging
 import os
 import datetime
-
-
-client = MongoClient(f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongodb.net/sweproject4?retryWrites=true&w=majority&appName=SWEProject2")
-'''
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
