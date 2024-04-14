@@ -1,7 +1,6 @@
 import pytest
 from app import create_app
 
-
 class Tests:
     """
     This class contains test cases for the web app.

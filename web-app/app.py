@@ -3,19 +3,11 @@ from flask import Flask, render_template
 from flask_cors import CORS
 from pymongo import MongoClient
 
-
-# redirect, abort, url_for, make_response
-# import pymongo
-
-# load_dotenv()
-
 # DB Set up
 client = MongoClient("mongodb://localhost:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
-def test_function():
-    return None
 
 def create_app(test_config=None):
     """
