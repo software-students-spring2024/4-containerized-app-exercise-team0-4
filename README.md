@@ -5,7 +5,7 @@
 # Voice App Recorder
 
 ## Description 
-This app is designed to allow users to generate transcripts of voice recordings.
+This app is designed to allow users to generate transcripts of voice recordings. It allows users to use their laptop microphone for recording an audio file. This audio file is analyzed by a Machine Learning Client which generates a transcript of the recording. Transcripts are displayed on the web app for the user to view.
 
 ## Add environment variables to web-app and machine-learning-client
 1. Create a .env file in the root directory of the web-app and machine-learning-client
@@ -40,11 +40,10 @@ docker build -t machine-learning-client .
 ```
 docker run -p 3000:3000 web-app
 docker run machine-learning-client
+```
 
 ## Team Members
 - [Nathanuel Dixon](https://github.com/nathanuel0322)
 - [Aarav Sawlani](https://github.com/aaravsawlani)
 - [Josh Forlenza](https://github.com/joshforlenza)
 - [Eugene Chang](https://github.com/egnechng)
-
-```
