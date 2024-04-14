@@ -9,11 +9,9 @@ black = "*"
 flask = "*"
 flask_cors = "*"
 pymongo = "*"
-python-dotenv = "*"
-typing-extensions = "*"
-speech_recognition = "*"
+SpeechRecognition = "*"
 pydub = "*"
-pocketspinx = "*"
+pocketsphinx = "*"
 
 [dev-packages]
 
