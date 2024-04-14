@@ -17,8 +17,11 @@ tomli = "*"  # Ensure this line is added
 flask-login = "*"
 flask-pymongo = "*"
 coverage = "*"
+flask_pymongo = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-flask = "*"
 
 [requires]
-python_version = "3.10"
+python_version = "3"
