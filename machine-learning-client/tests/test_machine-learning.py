@@ -1,8 +1,8 @@
+# pylint: disable=missing-final-newline,missing-module-docstring,import-error
 import pytest
 from unittest.mock import patch, MagicMock, mock_open
 from pymongo.results import InsertOneResult
 from main import app, convert_mpeg_to_wav, transcribe_audio, save_transcription
-import os 
 
 class Tests:
     @pytest.fixture()
