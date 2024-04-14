@@ -1,9 +1,12 @@
 {% extends "layout.html" %} {% block content %}
-<h2>Record Memo</h2>
+<div>
+  <h1 style="font-size: 24px;">Record Memo</h1>
+</div>
+
 <div class="audio-recorder">
-  <div class="controls">
-    <div id="startButton" class="button"><button>Start</button></div>
-    <div id="stopButton" class="button"><button>Stop</button></div>
+  <div class="controls" style="display: flex;">
+    <div id="startButton" class="button" style="margin-right: 10px;"><button>Start</button></div>
+    <div id="stopButton" class="button" style="margin-right: 10px;"><button>Stop</button></div>
     <div id="saveButton" class="button"><button>Save</button></div>
   </div>
   <div class="audio-preview">
@@ -70,12 +73,15 @@
       },
       body: recordedBlob
     })
-    .then((response) => {
+    .then(response => response.json())
+    .then(data => {
       // Uploaded
       console.log("Uploaded");
       // WAIT UNTIL ML CLIENT RETURNS TRANSCRIPT
       log(`Retrieving audio transcript.`);
       // DISPLAY TRANSCRIPT
+      console.log(data.message)
+      log(`Transcript: ` + data.transcript)
     })
     .catch((error) => {
       console.log(error);
