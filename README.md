@@ -6,6 +6,13 @@
 
 Build a containerized app that uses machine learning. See [instructions](./instructions.md) for details.
 
+## Add environment variables to web-app and machine-learning-client
+1. Create a .env file in the root directory of the web-app and machine-learning-client
+2. Add the following lines to the .env file
+```
+DB_USER=nathan0322
+DB_PW=cb2oROKA3y3TfpPG
+```
 
 ## How to run MongoDB
 1. Pull the MongoDB image from Docker
