@@ -61,6 +61,7 @@ def upload_audio():
         result = collection.insert_one(transcription_data)
         return jsonify({
             "message": "Transcription saved successfully",
+            "transcript": transcription,
             "id": str(result.inserted_id)
         })
     else:
