@@ -6,10 +6,16 @@ import ffmpeg
 import logging
 import os
 import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DB_USER = os.getenv("DB_USER")
+DB_PW = os.getenv("DB_PW")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongodb.net/sweproject4?retryWrites=true&w=majority&appName=SWEProject2")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
