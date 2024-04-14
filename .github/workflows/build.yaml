@@ -24,3 +24,4 @@ jobs:
       - name: Test with pytest
         run: |
           pipenv run python3 -m pytest
+          working-directory: ./web-app
