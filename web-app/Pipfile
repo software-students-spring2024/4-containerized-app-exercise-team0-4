@@ -11,7 +11,8 @@ flask_cors = "*"
 pymongo = "*"
 python-dotenv = "*"
 typing-extensions = "*"
-tomli = "*"  # Ensure this line is added
+tomli = "*"  # Ensure this line is add
+dill = "*"
 
 [dev-packages]
 
