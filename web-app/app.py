@@ -28,6 +28,7 @@ client = MongoClient("mongodb://localhost:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
+'''
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -97,40 +98,30 @@ def signup():
             return redirect('/')
         else:
             return render_template('signup.html')
+'''
 
 @app.route("/")
 def home():
     """
     Route for the home page
     """
+    '''
     if current_user.is_authenticated:
         return render_template("index.html")
     else:
         return redirect("/login")
-
-@app.route("/record", methods=["POST"])
-def save_recording():
-    """
-    Route for save_recording POST request
-    """
-    print("received")
-    print(request.data)
-    return render_template("record.html")
+    '''
+    return render_template("index.html")
 
 @app.route("/record")
 def record():
     return render_template("record.html")
-
-@app.route("/view_transcription")
-def view_transcription():
-    return render_template("view_transcription.html")
 
 @app.route("/view_all")
 def view_all():
 
     # Get all transcriptions from the database
     transcriptions = collection.find()
-    # print(transcriptions)
     
     return render_template("view_all.html", transcriptions=transcriptions)
 
