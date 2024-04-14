@@ -11,12 +11,11 @@
 <body>
     <aside>
         <div>
-            <h1>Recorder</h1>
+            <h1>Voice Memos</h1>
             <nav>
                 <ul id="navList">
                     <li data-target="record" class="{{ 'active' if request.path == '/record' else '' }}"><a href="/record">Record</a></li>
-                    <li data-target="view transcription" class="{{ 'active' if request.path == '/view_transcription' else '' }}"><a href="/view_transcription">View Transcription</a></li>
-                    <li data-target="see all transcriptions" class="{{ 'active' if request.path == '/view_all' else '' }}"><a href="/view_all">See All Transcriptions</a></li>
+                    <li data-target="see all transcriptions" class="{{ 'active' if request.path == '/view_all' else '' }}"><a href="/view_all">View All Transcripts</a></li>
                 </ul>
             </nav>
         </div>
