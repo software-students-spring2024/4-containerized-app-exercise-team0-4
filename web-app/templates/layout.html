@@ -15,7 +15,7 @@
             <nav>
                 <ul id="navList">
                     <li data-target="record" class="{{ 'active' if request.path == '/record' else '' }}"><a href="/record">Record</a></li>
-                    <li data-target="see all transcriptions" class="{{ 'active' if request.path == '/view_all' else '' }}"><a href="/view_all">View All Transcripts</a></li>
+                    <li data-target="view_all" class="{{ 'active' if request.path == '/view_all' else '' }}"><a href="/view_all">View All Transcripts</a></li>
                 </ul>
             </nav>
         </div>
@@ -23,6 +23,5 @@
     <div class="w3-container" style="padding: 70px 16px; margin-left: 220px;">
         {% block content %} {% endblock %}
     </div>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

@@ -8,10 +8,10 @@ import os
 import datetime
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app)
 
 # DB Set up
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://mongodb:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
@@ -56,12 +56,12 @@ def save_transcription(transcription):
 
 
 @app.route("/upload-audio", methods=["POST"])
-@cross_origin(origins="*", supports_credentials=True)
+@cross_origin(origins="*")
 def upload_audio():
     # Receive audio file from frontend
     # print(request.data)
     audio_data = request.data
-
+    print(audio_data)
     # Convert to .wav and get the path to the converted file
     wav_file_path = convert_mpeg_to_wav(audio_data)
 
