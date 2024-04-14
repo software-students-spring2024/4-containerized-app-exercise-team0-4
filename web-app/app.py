@@ -2,11 +2,13 @@
 # from dotenv import load_dotenv
 """Module providing framework for the web app."""
 from flask import Flask, render_template, request
+from flask_cors import CORS
 
 # redirect, abort, url_for, make_response
 # import pymongo
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Need to setup database
 """

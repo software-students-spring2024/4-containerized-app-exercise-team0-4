@@ -7,9 +7,11 @@ name = "pypi"
 pylint = "*"
 black = "*"
 flask = "*"
+flask_cors = "*"
 pymongo = "*"
 python-dotenv = "*"
 typing-extensions = "*"
+
 
 [dev-packages]
 
