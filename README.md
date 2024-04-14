@@ -7,14 +7,6 @@
 ## Description 
 This app is designed to allow users to generate transcripts of voice recordings. It allows users to use their laptop microphone for recording an audio file. This audio file is analyzed by a Machine Learning Client which generates a transcript of the recording. Transcripts are displayed on the web app for the user to view.
 
-## Add environment variables to web-app and machine-learning-client
-1. Create a .env file in the root directory of the web-app and machine-learning-client
-2. Add the following lines to the .env file
-```
-DB_USER=nathan0322
-DB_PW=cb2oROKA3y3TfpPG
-```
-
 ## How to run MongoDB
 1. Pull the MongoDB image from Docker
 ```
@@ -38,9 +30,11 @@ docker build -t machine-learning-client .
 
 2. Run the Docker container for web-app and machine-learning-client
 ```
-docker run -p 3000:3000 web-app
+docker run -p 5001:5000 web-app
 docker run machine-learning-client
 ```
+
+3. Access the web-app at http://localhost:5001
 
 ## Team Members
 - [Nathanuel Dixon](https://github.com/nathanuel0322)

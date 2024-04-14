@@ -1,25 +1,23 @@
 # import os
 # from dotenv import load_dotenv
 """Module providing framework for the web app."""
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from flask_cors import CORS
 import os
-from dotenv import load_dotenv
-from flask_pymongo import PyMongo, MongoClient
+from pymongo import MongoClient
 
-# redirect, abort, url_for, make_response
-# import pymongo
-
-load_dotenv()
-
-DB_USER = os.getenv("DB_USER")
-DB_PW = os.getenv("DB_PW")
 
 app = Flask(__name__)
-app.secret_key = os.urandom(12)
-app.config["MONGO_URI"] = f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongodb.net/sweproject4?retryWrites=true&w=majority&appName=SWEProject2"
-mongo = PyMongo(app)
 CORS(app)  # Enable CORS for all routes
+
+# DB Set up
+client = MongoClient("mongodb://localhost:27017/")
+# check if client is connected to the server
+print("client: ", client)
+db = client["audio-transcriptions"]
+print("db: ", db)
+collection = db["transcriptions"]
+print("collection: ", collection)
 
 # Need to setup database
 """
@@ -58,12 +56,11 @@ def record():
 
 @app.route("/view_all")
 def view_all():
-
     # Get all transcriptions from the database
+    print("collection: ", collection)
     transcriptions = collection.find()
-    
+    print("transcriptions: ", transcriptions)
     return render_template("view_all.html", transcriptions=transcriptions)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -12,12 +12,5 @@ RUN pip3 install -r requirements.txt
 # Copy the current directory contents into the container at /app
 ADD . .
 
-# Set the Flask run port
-ENV FLASK_RUN_PORT=3000
-
-# expose the port that the Flask app is running on
-EXPOSE 3000
-
 # Run app.py when the container launches
-# CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
-CMD [ "python3", "-m" , "flask", "run", "--host=127.0.0.1", "--port=3000"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

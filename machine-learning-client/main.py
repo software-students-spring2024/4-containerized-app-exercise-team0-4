@@ -6,16 +6,12 @@ import ffmpeg
 import logging
 import os
 import datetime
-from dotenv import load_dotenv
-
-load_dotenv()
-
-DB_USER = os.getenv("DB_USER")
-DB_PW = os.getenv("DB_PW")
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-client = MongoClient(f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongodb.net/sweproject4?retryWrites=true&w=majority&appName=SWEProject2")
+CORS(app, supports_credentials=True)
+
+# DB Set up
+client = MongoClient("mongodb://localhost:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
@@ -51,17 +47,18 @@ def transcribe_audio(audio_file):
         
 def save_transcription(transcription):
     transcription_data = {
-            "transcription": transcription,
-            "username": "DefaultUser",  # Using a default username
-            "date_created": datetime.datetime.utcnow()  # Automatically setting the date to now
-        }
+        "transcription": transcription,
+        "username": "DefaultUser",  # Using a default username
+        "date_created": datetime.datetime.utcnow()  # Automatically setting the date to now
+    }
     result = collection.insert_one(transcription_data)
     return result
 
 
-@app.route("/upload-audio", methods=["POST"])
-@cross_origin()  # Allow cross-origin access for this route
+@app.route("/upload-audio", methods=["POST", "OPTIONS"])
+@cross_origin(origins="*", supports_credentials=True)
 def upload_audio():
+    print("call made")
     # Receive audio file from frontend
     print(request.data)
     audio_data = request.data
@@ -91,4 +88,4 @@ def upload_audio():
         return jsonify({"error": "Transcription failed"}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3001)
+    app.run(debug=True)
