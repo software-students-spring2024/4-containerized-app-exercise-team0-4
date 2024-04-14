@@ -8,7 +8,6 @@ client = MongoClient("mongodb://localhost:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
-
 def create_app(test_config=None):
     """
     Create and configure the Flask application.
@@ -38,13 +37,13 @@ def create_app(test_config=None):
         """
         return render_template("record.html")
 
-@app.route("/view_all")
-def view_all():
-    # Get all transcriptions from the database
-    print("collection: ", collection)
-    transcriptions = collection.find()
-    print("transcriptions: ", transcriptions)
-    return render_template("view_all.html", transcriptions=transcriptions)
+    @app.route("/view_all")
+    def view_all():
+        # Get all transcriptions from the database
+        print("collection: ", collection)
+        transcriptions = collection.find()
+        print("transcriptions: ", transcriptions)
+        return render_template("view_all.html", transcriptions=transcriptions)
 
 if __name__ == "__main__":
     app = create_app()
