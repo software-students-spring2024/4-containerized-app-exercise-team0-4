@@ -7,7 +7,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from dotenv import load_dotenv
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, MongoClient
 
 # redirect, abort, url_for, make_response
 # import pymongo
@@ -22,6 +22,11 @@ app.secret_key = os.urandom(12)
 app.config["MONGO_URI"] = f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongodb.net/sweproject4?retryWrites=true&w=majority&appName=SWEProject2"
 mongo = PyMongo(app)
 CORS(app)  # Enable CORS for all routes
+
+# DB Set up
+client = MongoClient("mongodb://localhost:27017/")
+db = client["audio-transcriptions"]
+collection = db["transcriptions"]
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -93,22 +98,6 @@ def signup():
         else:
             return render_template('signup.html')
 
-# Need to setup database
-"""
-# Connect to the MongoDB server using environment variables 
-load_dotenv()
-connection = pymongo.MongoClient(os.getenv('MONGO_URI'))
-db = connection[os.getenv('MONGO_DBNAME')]
-try:
-    # verify the connection works by pinging the database
-    connection.admin.command("ping")  
-    print(" *", "Connected to MongoDB!")  
-except Exception as e:
-    # the ping command failed, so the connection is not available.
-    print(" * MongoDB connection error:", e)
-"""
-
-
 @app.route("/")
 def home():
     """
@@ -138,7 +127,12 @@ def view_transcription():
 
 @app.route("/view_all")
 def view_all():
-    return render_template("view_all.html")
+
+    # Get all transcriptions from the database
+    transcriptions = collection.find()
+    # print(transcriptions)
+    
+    return render_template("view_all.html", transcriptions=transcriptions)
 
 
 if __name__ == "__main__":
