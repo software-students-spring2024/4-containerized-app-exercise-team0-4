@@ -22,7 +22,7 @@ jobs:
         working-directory: ./web-app
 
       - name: Run web-app tests with Pipenv
-        run: python3 -m pytest
+        run: pipenv run -m pytest
         working-directory: ./web-app
 
   machine-learning-client-build-and-test:
@@ -44,5 +44,5 @@ jobs:
         working-directory: ./machine-learning-client
 
       - name: Run machine-learning-client tests with Pipenv
-        run: python3 -m pytest
+        run: pipenv run -m pytest
         working-directory: ./machine-learning-client
