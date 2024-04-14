@@ -65,8 +65,13 @@
   }
 
   function save() {
+    fetch('http://127.0.0.1:5002/test')
+      .then(response => response.json())
+      .then(data => {
+        console.log("test:", data.message)
+      })
     console.log(recordedBlob)
-    fetch("http://localhost:5000/upload-audio", {
+    fetch("http://127.0.0.1:5002/upload-audio", {
       method: "POST",
       headers: {
         "Content-Type": "audio/mpeg"
@@ -74,18 +79,18 @@
       body: recordedBlob
     })
     .then(response => response.json())
-    .then(data => {
-      // Uploaded
-      console.log("Uploaded");
-      // WAIT UNTIL ML CLIENT RETURNS TRANSCRIPT
-      log(`Retrieving audio transcript.`);
-      // DISPLAY TRANSCRIPT
-      console.log(data.message)
-      log(`Transcript: ` + data.transcript)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then(data => {
+        // Uploaded
+        console.log("Uploaded");
+        // WAIT UNTIL ML CLIENT RETURNS TRANSCRIPT
+        log(`Retrieving audio transcript.`);
+        // DISPLAY TRANSCRIPT
+        console.log(data.message)
+        log(`Transcript: ` + data.transcript)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     log(`Successfully saved audio.`);
   }
 

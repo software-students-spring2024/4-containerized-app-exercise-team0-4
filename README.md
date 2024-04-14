@@ -30,11 +30,11 @@ docker build -t machine-learning-client .
 
 2. Run the Docker container for web-app and machine-learning-client
 ```
-docker run -p 5001:5000 web-app
-docker run machine-learning-client
+docker run -p 5001:5001 web-app
+docker run -p 5002:5002 machine-learning-client
 ```
 
-3. Access the web-app at http://localhost:5001
+3. Access the web-app at http://127.0.0.1:5001
 
 ## Team Members
 - [Nathanuel Dixon](https://github.com/nathanuel0322)

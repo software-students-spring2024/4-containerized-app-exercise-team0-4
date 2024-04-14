@@ -6,6 +6,7 @@ import ffmpeg
 import logging
 import os
 import datetime
+
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -15,23 +16,23 @@ db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
 def convert_mpeg_to_wav(binary_data):
-        temp_file_path = 'temp_input.mpeg'
-        output_wav_path = 'output.wav'
-        
-        with open(temp_file_path, 'wb') as temp_file:
-            temp_file.write(binary_data)
+    temp_file_path = 'temp_input.mpeg'
+    output_wav_path = 'output.wav'
+    
+    with open(temp_file_path, 'wb') as temp_file:
+        temp_file.write(binary_data)
 
-        try:
-            # Convert the MPEG file to WAV using ffmpeg
-            ffmpeg.input(temp_file_path).output(output_wav_path, format='wav').run(overwrite_output=True)
-            logging.info("Conversion successful!")
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-            return None  # Return None if conversion fails
-        finally:
-            os.remove(temp_file_path)
+    try:
+        # Convert the MPEG file to WAV using ffmpeg
+        ffmpeg.input(temp_file_path).output(output_wav_path, format='wav').run(overwrite_output=True)
+        logging.info("Conversion successful!")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return None  # Return None if conversion fails
+    finally:
+        os.remove(temp_file_path)
 
-        return output_wav_path
+    return output_wav_path
 
 def transcribe_audio(audio_file):
     r = sr.Recognizer()
@@ -54,12 +55,11 @@ def save_transcription(transcription):
     return result
 
 
-@app.route("/upload-audio", methods=["POST", "OPTIONS"])
+@app.route("/upload-audio", methods=["POST"])
 @cross_origin(origins="*", supports_credentials=True)
 def upload_audio():
-    print("call made")
     # Receive audio file from frontend
-    print(request.data)
+    # print(request.data)
     audio_data = request.data
 
     # Convert to .wav and get the path to the converted file
@@ -92,4 +92,4 @@ def test():
     return jsonify({"message": "Server is up and running!"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5002)
