@@ -1,5 +1,6 @@
-![Lint-free](https://github.com/nyu-software-engineering/containerized-app-exercise/actions/workflows/lint.yml/badge.svg)
-![CI/CD](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/build.yml/badge.svg)
+![Lint-free](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/lint.yml/badge.svg)
+![CI/CD](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/build.yaml/badge.svg)
+![Log](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/event-logger.yml/badge.svg)
 
 # Containerized App Exercise
 
