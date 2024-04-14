@@ -11,7 +11,7 @@ flask_cors = "*"
 pymongo = "*"
 python-dotenv = "*"
 typing-extensions = "*"
-
+tomli = "*"  # Added tomli to resolve the pylint dependency issue
 
 [dev-packages]
 
