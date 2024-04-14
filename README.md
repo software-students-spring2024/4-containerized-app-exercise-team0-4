@@ -2,7 +2,7 @@
 ![CI/CD](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/build.yaml/badge.svg)
 ![Log](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/event-logger.yml/badge.svg)
 
-# Voice App Recorder
+# Voice Memo Recorder App
 
 ## Description 
 This app is designed to allow users to generate transcripts of voice recordings. It allows users to use their laptop microphone for recording an audio file. This audio file is analyzed by a Machine Learning Client which generates a transcript of the recording. Transcripts are displayed on the web app for the user to view.
