@@ -1,9 +1,12 @@
 {% extends "layout.html" %} {% block content %}
-<h2>Record Memo</h2>
+<div>
+  <h1 style="font-size: 24px;">Record Memo</h1>
+</div>
+
 <div class="audio-recorder">
-  <div class="controls">
-    <div id="startButton" class="button"><button>Start</button></div>
-    <div id="stopButton" class="button"><button>Stop</button></div>
+  <div class="controls" style="display: flex;">
+    <div id="startButton" class="button" style="margin-right: 10px;"><button>Start</button></div>
+    <div id="stopButton" class="button" style="margin-right: 10px;"><button>Stop</button></div>
     <div id="saveButton" class="button"><button>Save</button></div>
   </div>
   <div class="audio-preview">
@@ -18,9 +21,6 @@
 </div>
 
 <script>
-  let username = "{{ username }}";  // Accessing the username
-  console.log("username: ", username)
-
   let preview = document.getElementById("preview");
   let recording = document.getElementById("recording");
   let startButton = document.getElementById("startButton");
@@ -65,24 +65,16 @@
   }
 
   function save() {
-    console.log("save body: ", { blob: recordedBlob, username });
+    console.log(recordedBlob)
     fetch("http://127.0.0.1:3001/upload-audio", {
       method: "POST",
       headers: {
         "Content-Type": "audio/mpeg"
       },
-      body: { recordedBlob, username }
+      body: recordedBlob
     })
     .then(response => response.json())
     .then(data => {
-      // data will be 
-        // return jsonify({
-        //     "message": "Transcription saved successfully",
-        //     "transcript": transcription,
-        //     "id": str(result.inserted_id)
-        // })
-      // now, update the mongo, using the id, with the username
-
       // Uploaded
       console.log("Uploaded");
       // WAIT UNTIL ML CLIENT RETURNS TRANSCRIPT
