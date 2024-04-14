@@ -39,11 +39,20 @@ def create_app(test_config=None):
 
     @app.route("/view_all")
     def view_all():
+        """
+        Route for viewing all transcriptions.
+
+        Retrieves all transcriptions from the database and renders them in the view_all.html template.
+
+        Returns:
+            The rendered view_all.html template with the transcriptions.
+        """
         # Get all transcriptions from the database
-        print("collection: ", collection)
         transcriptions = collection.find()
-        print("transcriptions: ", transcriptions)
+        
         return render_template("view_all.html", transcriptions=transcriptions)
+    
+    return app
 
 if __name__ == "__main__":
     app = create_app()

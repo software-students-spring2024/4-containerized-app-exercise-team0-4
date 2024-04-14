@@ -85,6 +85,11 @@ def upload_audio():
         })
     else:
         return jsonify({"error": "Transcription failed"}), 500
+    
+# create a simple get just to test the server
+@app.route("/test", methods=["GET"])
+def test():
+    return jsonify({"message": "Server is up and running!"})
 
 if __name__ == "__main__":
     app.run(debug=True)
