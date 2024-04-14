@@ -13,7 +13,7 @@ SpeechRecognition = "*"
 pydub = "*"
 pocketsphinx = "*"
 tomli = "*"  # Ensure this line is added
-
+dill = "*"
 
 [dev-packages]
 
