@@ -5,6 +5,8 @@ click==8.1.7
 dill==0.3.8
 dnspython==2.6.1
 Flask==3.0.2
+flask-cors==4.0.0
+Flask-PyMongo==2.3.0
 importlib_metadata==7.1.0
 isort==5.13.2
 itsdangerous==2.1.2
