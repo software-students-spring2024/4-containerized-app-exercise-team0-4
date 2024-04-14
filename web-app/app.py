@@ -4,7 +4,7 @@ from flask_cors import CORS
 from pymongo import MongoClient
 
 # DB Set up
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://mongodb:27017/")
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
