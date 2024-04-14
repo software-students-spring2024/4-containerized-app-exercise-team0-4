@@ -1,5 +1,6 @@
 import pytest
-from app import app
+from app import create_app
+
 
 class Tests:
     """
@@ -13,10 +14,10 @@ class Tests:
         Returns:
             Flask app: The Flask app object.
         """
-        app.config.update({
+        app = create_app({
             "TESTING": True,
         })
-        yield app
+        return app
 
     @pytest.fixture()
     def client(self, app):

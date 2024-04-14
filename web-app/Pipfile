@@ -17,6 +17,7 @@ tomli = "*"  # Ensure this line is added
 flask-login = "*"
 flask-pymongo = "*"
 coverage = "*"
+flask_pymongo = "*"
 
 [dev-packages]
 
