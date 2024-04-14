@@ -1,3 +1,4 @@
+# pylint: disable=missing-final-newline,missing-module-docstring,import-error
 import pytest
 from app import create_app
 

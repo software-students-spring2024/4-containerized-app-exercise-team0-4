@@ -1,8 +1,8 @@
+# pylint: disable=missing-final-newline,missing-module-docstring,import-error
 import pytest
 from unittest.mock import patch, MagicMock, mock_open
 from pymongo.results import InsertOneResult
-from main import app, convert_mpeg_to_wav, transcribe_audio, save_transcription
-import os 
+from main import app, convert_mpeg_to_wav, transcribe_audio
 
 class Tests:
     @pytest.fixture()
@@ -10,17 +10,12 @@ class Tests:
         app.config.update({
             "TESTING": True,
         })
-
-        # other setup can go here
-
         yield app
-
-        # clean up / reset resources here
 
     @pytest.fixture()
     def client(self, app):
         return app.test_client()
-    
+
     @staticmethod
     def test_sanity_check():
         expected = True
