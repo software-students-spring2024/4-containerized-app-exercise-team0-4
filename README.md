@@ -2,9 +2,10 @@
 ![CI/CD](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/build.yaml/badge.svg)
 ![Log](https://github.com/software-students-spring2024/4-containerized-app-exercise-team0-4/actions/workflows/event-logger.yml/badge.svg)
 
-# Containerized App Exercise
+# Voice App Recorder
 
-Build a containerized app that uses machine learning. See [instructions](./instructions.md) for details.
+## Description 
+This app is designed to allow users to generate transcripts of voice recordings.
 
 ## Add environment variables to web-app and machine-learning-client
 1. Create a .env file in the root directory of the web-app and machine-learning-client
@@ -39,4 +40,11 @@ docker build -t machine-learning-client .
 ```
 docker run -p 3000:3000 web-app
 docker run machine-learning-client
+
+## Team Members
+- [Nathanuel Dixon](https://github.com/nathanuel0322)
+- [Aarav Sawlani](https://github.com/aaravsawlani)
+- [Josh Forlenza](https://github.com/joshforlenza)
+- [Eugene Chang](https://github.com/egnechng)
+
 ```
