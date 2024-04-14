@@ -20,6 +20,8 @@ coverage = "*"
 flask_pymongo = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3"
