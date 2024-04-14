@@ -19,10 +19,7 @@ client = MongoClient(f"mongodb+srv://{DB_USER}:{DB_PW}@sweproject2.v6vtrh6.mongo
 db = client["audio-transcriptions"]
 collection = db["transcriptions"]
 
-@app.route("/upload-audio", methods=["POST"])
-@cross_origin()  # Allow cross-origin access for this route
-def upload_audio():
-    def convert_mpeg_to_wav(binary_data):
+def convert_mpeg_to_wav(binary_data):
         temp_file_path = 'temp_input.mpeg'
         output_wav_path = 'output.wav'
         
@@ -33,7 +30,7 @@ def upload_audio():
             # Convert the MPEG file to WAV using ffmpeg
             ffmpeg.input(temp_file_path).output(output_wav_path, format='wav').run(overwrite_output=True)
             logging.info("Conversion successful!")
-        except ffmpeg.Error as e:
+        except Exception as e:
             logging.error(f"An error occurred: {e}")
             return None  # Return None if conversion fails
         finally:
@@ -41,7 +38,32 @@ def upload_audio():
 
         return output_wav_path
 
+def transcribe_audio(audio_file):
+    r = sr.Recognizer()
+    with sr.AudioFile(audio_file) as source:
+        audio_data = r.record(source)
+        try:
+            transcription = r.recognize_sphinx(audio_data)
+            return transcription
+        except Exception as e:
+            logging.error(f"Speech recognition error: {e}")
+            return None
+        
+def save_transcription(transcription):
+    transcription_data = {
+            "transcription": transcription,
+            "username": "DefaultUser",  # Using a default username
+            "date_created": datetime.datetime.utcnow()  # Automatically setting the date to now
+        }
+    result = collection.insert_one(transcription_data)
+    return result
+
+
+@app.route("/upload-audio", methods=["POST"])
+@cross_origin()  # Allow cross-origin access for this route
+def upload_audio():
     # Receive audio file from frontend
+    print(request.data)
     audio_data = request.data
 
     # Convert to .wav and get the path to the converted file
@@ -59,12 +81,7 @@ def upload_audio():
 
     # Check for transcription and save to MongoDB
     if transcription:
-        transcription_data = {
-            "transcription": transcription,
-            "username": "DefaultUser",  # Using a default username
-            "date_created": datetime.datetime.utcnow()  # Automatically setting the date to now
-        }
-        result = collection.insert_one(transcription_data)
+        result = save_transcription(transcription)
         return jsonify({
             "message": "Transcription saved successfully",
             "transcript": transcription,
@@ -72,17 +89,6 @@ def upload_audio():
         })
     else:
         return jsonify({"error": "Transcription failed"}), 500
-
-def transcribe_audio(audio_file):
-    r = sr.Recognizer()
-    with sr.AudioFile(audio_file) as source:
-        audio_data = r.record(source)
-        try:
-            transcription = r.recognize_sphinx(audio_data)
-            return transcription
-        except (sr.UnknownValueError, sr.RequestError) as e:
-            logging.error(f"Speech recognition error: {e}")
-            return None
 
 if __name__ == "__main__":
     app.run(debug=True, port=3001)
