@@ -17,8 +17,12 @@ dill = "*"
 pytest = "*"
 pytest-flask = "*"
 coverage = "*"
+ffmpeg-python = "*"
+ffmpeg = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-flask = "*"
 
 [requires]
 python_version = "3"
