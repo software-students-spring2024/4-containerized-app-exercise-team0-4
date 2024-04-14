@@ -18,6 +18,9 @@
 </div>
 
 <script>
+  let username = "{{ username }}";  // Accessing the username
+  console.log("username: ", username)
+
   let preview = document.getElementById("preview");
   let recording = document.getElementById("recording");
   let startButton = document.getElementById("startButton");
@@ -62,16 +65,24 @@
   }
 
   function save() {
-    console.log(recordedBlob)
+    console.log("save body: ", { blob: recordedBlob, username });
     fetch("http://127.0.0.1:3001/upload-audio", {
       method: "POST",
       headers: {
         "Content-Type": "audio/mpeg"
       },
-      body: recordedBlob
+      body: { recordedBlob, username }
     })
     .then(response => response.json())
     .then(data => {
+      // data will be 
+        // return jsonify({
+        //     "message": "Transcription saved successfully",
+        //     "transcript": transcription,
+        //     "id": str(result.inserted_id)
+        // })
+      // now, update the mongo, using the id, with the username
+
       // Uploaded
       console.log("Uploaded");
       // WAIT UNTIL ML CLIENT RETURNS TRANSCRIPT

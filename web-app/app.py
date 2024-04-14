@@ -130,7 +130,7 @@ def save_recording():
 
 @app.route("/record")
 def record():
-    return render_template("record.html")
+    return render_template("record.html", username=current_user.username)
 
 @app.route("/view_transcription")
 def view_transcription():
