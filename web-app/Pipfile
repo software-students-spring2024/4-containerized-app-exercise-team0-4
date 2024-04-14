@@ -11,9 +11,14 @@ flask_cors = "*"
 pymongo = "*"
 python-dotenv = "*"
 typing-extensions = "*"
-
+pytest = "*"
+pytest-flask = "*"
+tomli = "*"  # Ensure this line is added
+flask-login = "*"
+flask-pymongo = "*"
+coverage = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3"
+python_version = "3.10"

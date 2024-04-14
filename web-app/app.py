@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, MongoClient
 
 # redirect, abort, url_for, make_response
 # import pymongo
@@ -36,7 +36,6 @@ except Exception as e:
     print(" * MongoDB connection error:", e)
 """
 
-
 @app.route("/")
 def home():
     """
@@ -57,13 +56,13 @@ def save_recording():
 def record():
     return render_template("record.html")
 
-@app.route("/view_transcription")
-def view_transcription():
-    return render_template("view_transcription.html")
-
 @app.route("/view_all")
 def view_all():
-    return render_template("view_all.html")
+
+    # Get all transcriptions from the database
+    transcriptions = collection.find()
+    
+    return render_template("view_all.html", transcriptions=transcriptions)
 
 
 if __name__ == "__main__":

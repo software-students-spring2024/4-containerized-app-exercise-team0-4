@@ -1,1 +1,53 @@
-{% extends 'index.html' %}
+{% extends "layout.html" %} {% block content %}
+
+<style>
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+{% for transcription in transcriptions %}
+    <h1>My Recording Transcripts</h1>
+    
+    {% for transcription in transcriptions %}
+        <table>
+            <tr>
+                <th>Date Created</th>
+                <th>Transcript</th>
+            </tr>
+            <tr>
+                <td>{{ transcription.date_created }}</td>
+                <td>{{ transcription.transcription }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
+
+
+

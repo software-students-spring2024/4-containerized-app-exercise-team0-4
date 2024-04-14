@@ -61,6 +61,7 @@ def upload_audio():
     if transcription:
         transcription_data = {
             "transcription": transcription,
+            "username": "DefaultUser",  # Using a default username
             "date_created": datetime.datetime.utcnow()  # Automatically setting the date to now
         }
         result = collection.insert_one(transcription_data)
