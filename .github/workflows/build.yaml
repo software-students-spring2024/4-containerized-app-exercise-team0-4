@@ -3,25 +3,44 @@ name: CI / CD
 on: [push]
 
 jobs:
-  build:
+  web-app-build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    strategy:
-      matrix:
-        python-version: ["3.8"]
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.8 for web-app
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+          python-version: '3.8'
+
+      - name: Install web-app dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pipenv
-          pipenv --python ${{ matrix.python-version }}
-          pipenv install pytest pytest-flask python-dotenv 
-      - name: Test with pytest
+          pip install -r web-app/requirements.txt
+        working-directory: ./web-app
+
+      - name: Run web-app tests
+        run: pytest
+        working-directory: ./web-app
+
+  machine-learning-client-build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.8 for machine-learning-client
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install machine-learning-client dependencies
         run: |
-          pipenv run python3 -m pytest
-          working-directory: ./web-app
+          python -m pip install --upgrade pip
+          pip install -r machine-learning-client/requirements.txt
+        working-directory: ./machine-learning-client
+
+      - name: Run machine-learning-client tests
+        run: pytest
+        working-directory: ./machine-learning-client
